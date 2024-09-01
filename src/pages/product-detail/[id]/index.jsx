@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { isLoginSelector } from '@/store/slices/authSlice'
 import { setCartData } from '@/store/slices/UserProducts'
 import toast from 'react-hot-toast'
+import CommonCardSections from '@/Components/CommonCardSections'
+import newArrivals from '@/Components/commonProducts/newArrivals'
 
 const index = () => {
     const [size, setSize] = useState('')
@@ -16,6 +18,8 @@ const index = () => {
     const isLogin = useSelector(isLoginSelector)
     const router = useRouter()
     const productId = Number(router?.query.id);
+
+    const newArrivalsData = newArrivals.slice(0,4)
 
     const addToCart = (e) => {
         e.stopPropagation()
@@ -34,6 +38,7 @@ const index = () => {
     }
 
     return (
+        <>
         <section className='productDetailPage container commonMT'>
             <div className="row">
                 <div className="col-md-6 col-lg-5">
@@ -83,6 +88,10 @@ const index = () => {
                 </div>
             </div>
         </section>
+
+        <CommonCardSections title="New Arrivals" products={newArrivalsData} />
+        </>
+
     )
 }
 

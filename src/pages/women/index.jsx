@@ -9,10 +9,10 @@ import newArrivals from '@/Components/commonProducts/newArrivals'
 const Index = () => {
     return (
         <>
-            <CommonSwiper />
-            <CommonCardSections title={`Trending Women's Wear`} products={womensCloth} />
-            <CommonCardSections title={`Trending Watches`} products={womensWatches} />
-            <CommonCardSections title={`Trending Footwear`} products={womensShoes} />
+            <CommonSwiper womenPage={true} link1="womenWear" link2="womenWatches" link3="womenShoes" />
+            <CommonCardSections title={`Trending Women's Wear`} products={womensCloth} id="womenWear" />
+            <CommonCardSections title={`Trending Watches`} products={womensWatches} id="womenWatches"/>
+            <CommonCardSections title={`Trending Footwear`} products={womensShoes} id="womenShoes" />
             <CommonCardSections title={`New Arrivals`} products={newArrivals} newArrivals={true}/>
         </>
     )

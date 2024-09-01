@@ -53,51 +53,41 @@ const CommonCard = ({ product, sectionTitle, brand, title, img, price, offerPric
                 <div className="productDetails">
                     <h3 className='brandName'>{brand}</h3>
                     <span className='productName'>{title}</span>
+                    <div className="ratingWrapper">
+                        <div className="starsWrapper">
+                            <span><FaStar /></span>
+                            <span><FaStar /></span>
+                            <span><FaStar /></span>
+                            <span><FaStar /></span>
+                            <span><FaStar /></span>
+                        </div>
+                        <div className="reviewWrapper">
+                            <span className="review">(70)</span>
+                        </div>
+                    </div>
+                    <div className="priceWrapper row">
+                        <div className="col-lg-9 d-flex flex-column gap-2 align-items-start">
+                            <div className='d-flex align-items-center gap-2'>
+                                {price &&
+                                    <span className='cutPrice'>
+                                        {`₹${price}`}
+                                    </span>
+                                }
+                                <span className='discount'>20% Off</span>
+                            </div>
+                            <div>
+                                <span className='offerPrice'>{offerPrice ? `₹${offerPrice}` : ''}
+                                </span>
+                            </div>
+                        </div>
+                        <div className="col-lg-3 d-flex align-items-end justify-content-end">
+                            <button className='cartBtn'><FaCartPlus /></button>
+                        </div>
+                    </div>
                 </div>
 
-                <div className="priceWrapper">
-                    <span className='offerPrice'>{offerPrice ? `₹${offerPrice}` : ''}
-                        {
-                            price &&
-                        <span className='price'>{`₹${price}`}</span>
-                        }
-                    </span>
-                    <span className='discount'>20% Off</span>
-                </div>
-                <div className="ratingWrapper">
-                    <div className="starsWrapper">
-                        <span><FaStar /></span>
-                        <span><FaStar /></span>
-                        <span><FaStar /></span>
-                        <span><FaStar /></span>
-                        <span><FaStar /></span>
-                    </div>
-                    <div className="reviewWrapper">
-                        <span className="review">(70)</span>
-                    </div>
-
-                </div>
-                <div className="iconsWrapper">
-                    <span className='iconsViewBtn'><BsThreeDotsVertical /></span>
-
-                    <div className="hoverIcons">
-                        <span className='viewIcons'>
-                            <Link href={`/product-detail/${id}`}>
-                                <FaEye />
-                            </Link>
-                        </span>
-                        <span className='viewIcons'>
-                            <Link href={''}>
-                                <FaHeart onClick={(e) => addToWishlist(e)} />
-                            </Link>
-                        </span>
-                        <span className='viewIcons'>
-                            <Link href={''}>
-                                <FaCartPlus onClick={(e) => addToCart(e)} />
-                            </Link>
-                        </span>
-                    </div>
-
+                <div className="iconsWrapper" onClick={addToWishlist}>
+                    <span className='likeIcpn'><FaHeart /></span>
                 </div>
 
             </div>

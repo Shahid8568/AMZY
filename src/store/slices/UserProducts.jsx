@@ -25,7 +25,9 @@ const initialState = {
             couponCode: 'CLEARANCE50',
             discountOf: '15',
         },
-    ]
+    ],
+    orders: [],
+
 
 }
 
@@ -66,12 +68,16 @@ export const userProducts = createSlice({
             const { id } = action.payload;
             state.wishlist = state.wishlist.filter((item) => item.id !== id)
         },
+        setOrderData: (state, action) => {
+            const { data } = action.payload;
+            state.orders = [...state.orders, data]
+        },
 
     }
 
 })
 
-export const { setWishlistData, setCartData, setIsCartLink, removeCartItem, updateQuantity, removeWishListiItem } = userProducts.actions
+export const { setWishlistData, setCartData, setIsCartLink, removeCartItem, updateQuantity, removeWishListiItem,setOrderData } = userProducts.actions
 
 export const wishlistSelector = createSelector(
     (state) => state.UserProducts,
@@ -91,6 +97,11 @@ export const isCartLinkSelector = createSelector(
 export const couponsSelector = createSelector(
     (state) => state.UserProducts,
     (UserProducts) => UserProducts.coupons
+);
+
+export const orderDataSelector = createSelector(
+    (state) => state.UserProducts,
+    (UserProducts) => UserProducts.orders
 );
 
 export default userProducts.reducer

@@ -1,11 +1,13 @@
 import React from 'react'
 import CommonCardSections from './CommonCardSections'
-import HeroSect from './HeroSect'
+import SuperDealSect from './SuperDealSect'
 import SeasonalSale from './SeasonalSale'
-import BigDaysSales from './BigDaysSales'
 import UpcomingSale from './UpcomingSale'
 import featuredProducts from './commonProducts/featureproducts'
 import newArrivals from './commonProducts/newArrivals'
+import HeroSect from './HeroSect'
+import BrandsSect from './BrandsSect'
+import GoTopBtn from './GoTopBtn'
 
 const Home = () => {
 
@@ -13,11 +15,14 @@ const Home = () => {
     <div className='homePage'>
 
       <HeroSect />
+      <BrandsSect/>
       <CommonCardSections title="Feature Products" products={featuredProducts} />
       <SeasonalSale />
-      <BigDaysSales />
+      <SuperDealSect />
+      {/* <BigDaysSales /> */}
       <UpcomingSale />
       <CommonCardSections title="New Arrivals" products={newArrivals} />
+      {/* <GoTopBtn/> */}
 
 
     </div>

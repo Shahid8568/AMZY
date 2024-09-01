@@ -15,8 +15,12 @@ import { userLogOut } from '../../store/slices/authSlice.jsx';
 import { signOut } from 'firebase/auth'
 import toast from 'react-hot-toast';
 import { setIsCartLink } from '@/store/slices/UserProducts';
+import { useRouter } from 'next/router';
 
 const Header = () => {
+
+  const router = useRouter()
+
   const [show, setShow] = useState(false);
   const [modalShow, setModalShow] = useState(false);
   const [modalSignUp, setModalSignUp] = useState(false);
@@ -24,8 +28,6 @@ const Header = () => {
 
   const authUser = useSelector(state => state.authSlice)
   const user = useSelector(state => state.authSlice.isLogIn)
-  // console.log('userLog', user)
-  // console.log('authUser', authUser)
 
   const isVerified = authUser.isVerified;
 
@@ -59,12 +61,21 @@ const Header = () => {
           <div className="centerDiv">
             <nav className="navbar">
               <ul>
-                <span><Link href="/" >Home</Link></span>
-                <span><Link href="/men" >Men</Link></span>
-                <span><Link href="/women" >Women</Link></span>
-                <span onClick={handleCartNavigate}><Link href="/profile" >
-                  <FaCartPlus /> Cart
-                </Link></span>
+                <li>
+                  <Link href="/" className={`${router.pathname === '/' ? 'active' : ''}`}>Home
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/men" className={`${router.pathname === '/men' ? 'active' : ''}`}>Men</Link>
+                </li>
+                <li>
+                  <Link href="/women" className={`${router.pathname === '/women' ? 'active' : ''}`}>Women</Link>
+                </li>
+                <li onClick={handleCartNavigate}>
+                  <Link href="/profile" className={`${router.pathname === '' ? 'active' : ''}`}>
+                    <FaCartPlus /> Cart
+                  </Link>
+                </li>
               </ul>
             </nav>
           </div>
@@ -107,11 +118,21 @@ const Header = () => {
               <div className="centerDiv">
                 <nav className="navbar">
                   <ul>
-                    <span><Link href="/" >Home</Link></span>
-                    <span><Link href="Men" >Men</Link></span>
-                    <span><Link href="Women" >Women</Link></span>
-                    <span><Link href="Cart" > Cart <FaCartPlus />
-                    </Link></span>
+                    <li onClick={handleClose}>
+                      <Link href="/" className={`${router.pathname === '/' ? 'active' : ''}`}>Home
+                      </Link>
+                    </li>
+                    <li onClick={handleClose}>
+                      <Link href="/men" className={`${router.pathname === '/men' ? 'active' : ''}`}>Men</Link>
+                    </li>
+                    <li onClick={handleClose}>
+                      <Link href="/women" className={`${router.pathname === '/women' ? 'active' : ''}`}>Women</Link>
+                    </li>
+                    <li onClick={handleCartNavigate}>
+                      <Link href="/profile" className={`${router.pathname === '' ? 'active' : ''}`}>
+                        <FaCartPlus /> Cart
+                      </Link>
+                    </li>
                   </ul>
                 </nav>
               </div>

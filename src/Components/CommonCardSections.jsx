@@ -1,12 +1,12 @@
 import React from 'react'
 import CommonCard from './CommonCard';
 
-const CommonCardSections = ({ title, products, newArrivals }) => {
+const CommonCardSections = ({ title, products, id,newArrivals }) => {
 
   return (
-    <section className='featureProducts container commonMT'>
+    <section className='featureProducts container commonMT' id={id}>
 
-      <h1 className='commonHeadTag'>{title}</h1>
+      <h2 className='commonHeadTag'>{title}</h2>
       <div className="row">
         {
           newArrivals ? products.slice(0, 4).map((e) => {

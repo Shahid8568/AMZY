@@ -6,6 +6,7 @@ import { FaArrowRight } from "react-icons/fa";
 import Image from 'next/image';
 import appStoreImg from '../../Assets/images/appStore.png'
 import paymentsGatewaysImg from '../../Assets/images/payment_icons.webp'
+import Link from 'next/link';
 
 const Footer = () => {
   return (
@@ -20,19 +21,19 @@ const Footer = () => {
               <div className="contactDetails">
                 <div>
                   <span className='contactIcons'><FaPhoneAlt /></span>
-                  <span> +012-345-6789</span>
+                  <Link href={'tel:+0123456789'}> +012-345-6789</Link>
                 </div>
                 <div>
                   <span className='contactIcons'><FaPhoneAlt /></span>
-                  <span> +012-367-8945</span>
+                  <Link href={'tel:+0123456789'}> +012-367-8945</Link>
                 </div>
                 <div>
                   <span className='contactIcons1 contactIcons'><IoIosMail /></span>
-                  <span>amzy@gmail.com</span>
+                  <Link href={'mailto:amzy@gmail.com'}>amzy@gmail.com</Link>
                 </div>
                 <div>
                   <span className='contactIcons2 contactIcons'><FaLocationDot /></span>
-                  <span>Bhuj,India - 3700001</span>
+                  <span>Bhuj,India ~ 370-001</span>
                 </div>
               </div>
             </div>
@@ -48,21 +49,21 @@ const Footer = () => {
               </div>
 
               <div className="contactDetails">
-                <div>
+                <div className='d-flex gap-3'>
                   <span className='contactIcons'><FaArrowRight /></span>
-                  <span>View Cart</span>
+                  <Link href={'/men'}>Men</Link>
                 </div>
-                <div>
+                <div className='d-flex gap-3'>
                   <span className='contactIcons'><FaArrowRight /></span>
-                  <span>Your Wishlist</span>
+                  <Link href={'women'}>Women</Link>
                 </div>
-                <div>
+                <div className='d-flex gap-3'>
                   <span className='contactIcons'><FaArrowRight /></span>
-                  <span>Your Orders</span>
+                  <Link href={''}>Cart</Link>
                 </div>
-                <div>
+                <div className='d-flex gap-3'>
                   <span className='contactIcons'><FaArrowRight /></span>
-                  <span>Your Profile</span>
+                  <Link href={'/profile'}>Profile</Link>
                 </div>
               </div>
 

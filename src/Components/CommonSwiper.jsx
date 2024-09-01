@@ -18,32 +18,37 @@ import menBanner1 from '../Assets/images/mensBanner1.jpg'
 import menBanner2 from '../Assets/images/mensBanner2.jpg'
 import menBanner3 from '../Assets/images/mensBanner3.jpg'
 
-const CommonSwiper = () => {
+import womenBanner1 from '../Assets/images/womenBanner1.jpg'
+import womenBanner2 from '../Assets/images/womenBanner2.jpg'
+import womenBanner3 from '../Assets/images/womenBanner3.jpg'
+import Link from 'next/link';
+
+const CommonSwiper = ({ womenPage, link1, link2, link3 }) => {
 
     const swiperData = [
         {
             id: 0,
-            img: menBanner1,
-            title: "Men's Fashion",
+            img: womenPage ? womenBanner1 : menBanner1,
+            title: womenPage ? "Women's Fashion" : "Men's Fashion",
             desc: "Discover top-notch fashion at Amzy",
             sideText: 'FASHION LIFE',
-            link: '',
+            link: link1,
         },
         {
             id: 1,
-            img: menBanner2,
+            img: womenPage ? womenBanner2 : menBanner2,
             title: "Enhance Your Wardrobe",
             desc: "Elevate every step with our stylish shoes.",
             sideText: 'Step Into Style',
-            link: '',
+            link: link2,
         },
         {
             id: 2,
-            img: menBanner3,
+            img: womenPage ? womenBanner3 : menBanner3,
             title: "Timepiece Excellence",
             desc: "Upgrade your style with our classy watch collection",
             sideText: 'Define Your Moments',
-            link: '',
+            link: link3,
         },
 
     ]
@@ -88,32 +93,28 @@ const CommonSwiper = () => {
                             renderBullet: renderBullet
                         }}
                     >
-                            {
-                                swiperData.map((data, index) => {
-                                    return (
-                                        <SwiperSlide key={data.id} >
-                                            <div className={`swiperWrapper ${data.id === 0 ? 'clothCard' : data.id === 1 ? 'shoesCard' : 'watchCard'}`}>
-                                                <div className="swiperImg">
-                                                    <Image src={data.img} height={0} width={0} alt='banner1' />
-                                                </div>
-                                                <div className="swiperData">
-                                                    <span className='title'>{data.title}</span>
-                                                    <span className='desc'>{data.desc}</span>
-                                                    <button className='swiperBtn'> Shop Now</button>
-                                                </div>
-                                                <span className='sideText'>{data.sideText}</span>
+                        {
+                            swiperData.map((data, index) => {
+                                return (
+                                    <SwiperSlide key={data.id} >
+                                        <div className={`swiperWrapper ${data.id === 0 ? 'clothCard' : data.id === 1 ? 'shoesCard' : 'watchCard'}`}>
+                                            <div className="swiperImg">
+                                                <Image src={data.img} height={0} width={0} alt='banner1' />
                                             </div>
-                                        </SwiperSlide>
-                                    )
-                                })
-                            }
+                                            <div className="swiperData">
+                                                <span className='title'>{data.title}</span>
+                                                <span className='desc'>{data.desc}</span>
+                                                <Link href={`#${data.link}`}>
+                                                    <button className='swiperBtn'> Shop Now</button>
+                                                </Link>
+                                            </div>
+                                            <span className='sideText'>{data.sideText}</span>
+                                        </div>
+                                    </SwiperSlide>
+                                )
+                            })
+                        }
                     </Swiper>
-                    {/* <div className="swiper-button-prev" onClick={handlePrev} >
-                        <span><BiLeftArrowAlt color='white' size={42} /></span>
-                    </div>
-                    <div className="swiper-button-next" onClick={handleNext}>
-                        <span><BiRightArrowAlt color='white' size={42} /></span>
-                    </div> */}
                 </div>
 
             </section>
