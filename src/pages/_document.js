@@ -10,7 +10,7 @@ export default function Document() {
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
         />
-        <link rel="icon" href="../../public/favicon.ico" />
+        <link rel="icon" href="/favicon.ico" />
         <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
       </Head>
       <body>

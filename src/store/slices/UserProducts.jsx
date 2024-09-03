@@ -70,7 +70,7 @@ export const userProducts = createSlice({
         },
         setOrderData: (state, action) => {
             const { data } = action.payload;
-            state.orders = [...state.orders, data]
+            state.orders = [...state.orders, ...data];
         },
 
     }

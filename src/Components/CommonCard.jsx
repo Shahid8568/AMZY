@@ -81,7 +81,7 @@ const CommonCard = ({ product, sectionTitle, brand, title, img, price, offerPric
                             </div>
                         </div>
                         <div className="col-lg-3 d-flex align-items-end justify-content-end">
-                            <button className='cartBtn'><FaCartPlus /></button>
+                            <button className='cartBtn' onClick={addToCart}><FaCartPlus /></button>
                         </div>
                     </div>
                 </div>

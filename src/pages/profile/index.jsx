@@ -45,13 +45,17 @@ const Index = () => {
       id: 3,
       tab: 'Cart',
     },
+    {
+      id: 4,
+      tab: 'My Orders',
+    },
   ]
 
   const [activeTab, setActiveTab] = useState('My Profile');
   const [userData, setUserData] = useState({
     name: authUser.userName,
     email: authUser.userEmail,
-    number: authUser.userNumb
+    number: authUser.userNumber
   })
 
   const handleTabClick = (tab) => {
@@ -143,28 +147,34 @@ const Index = () => {
                       <div className="col-12">
                         <form action="" className='form-control border-0 profileUpdateForm' onSubmit={updateProfile}>
                           <div className="row align-items-end">
-                            <div className="col-12 col-lg-4">
+                            <div className="col-12 col-lg-6">
                               <div className="inputWrapper">
-                                <label htmlFor="name">Name : </label>
+                                <label htmlFor="name">Name </label>
                                 <input type="text" value={userData.name} placeholder='Enter Your Name' onChange={(e) => setUserData({ ...userData, name: e.target.value })} />
                               </div>
                             </div>
-                            <div className="col-12 col-lg-4">
+                            <div className="col-12 col-lg-6">
                               <div className="inputWrapper">
-                                <label htmlFor="email"> Email: </label>
+                                <label htmlFor="email"> Number </label>
+                                <input type="number" value={userData.number} placeholder='Enter Your Number' onChange={(e) => setUserData({ ...userData, number: e.target.value })} />
+                              </div>
+                            </div>
+                            <div className="col-12 col-lg-6">
+                              <div className="inputWrapper">
+                                <label htmlFor="email"> Email </label>
                                 <input type="email" value={userData.email} placeholder='Enter Your Email' onChange={(e) => setUserData({ ...userData, email: e.target.value })} />
                               </div>
                             </div>
 
-                            <div className="col-12 col-lg-4">
-                              <button className='updateBtn'>Update</button>
+                            <div className="col-12 col-lg-6">
+                              <button className='py-2 fw-bold btn btn-primary w-100'>Update</button>
                             </div>
                           </div>
                         </form>
 
                       </div>
 
-                      <div className="col-12 actionbtns d-flex gap-2 align-items-center justify-content-center">
+                      <div className="col-12 actionbtns mb-1 d-flex gap-2 align-items-center justify-content-center">
                         <button className='btn btn-warning py-2' onClick={userSignOut}>Log Out</button>
                         <button className='btn btn-danger py-2' onClick={accDelete}>Delete Account</button>
                       </div>
@@ -187,6 +197,11 @@ const Index = () => {
                 {activeTab === 'My Coupons' && (
                   <div className='row cartDataWrapper'>
                     <Coupons/>
+                  </div>
+                )}
+                {activeTab === 'My Orders' && (
+                  <div className='row wishlistDataWrapper'>
+                    <Wishlist ordersTab={true}/>
                   </div>
                 )}
 

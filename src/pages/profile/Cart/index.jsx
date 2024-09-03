@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { cartDataSelector, couponsSelector, removeCartItem, setOrderData, updateQuantity } from '@/store/slices/UserProducts'
 import toast from 'react-hot-toast'
 import { useRouter } from 'next/router';
-
+import logo from '../../../Assets/images/amzyLogo.png'
 const Cart = () => {
 
   const router = useRouter();
@@ -18,6 +18,8 @@ const Cart = () => {
   const [appliedCoupon, setAppliedCoupon] = useState(null)
 
   const [payAmount, setPayAmount] = useState(null)
+
+  const authUser = useSelector(state => state.authSlice)
 
   const handleRemoveItem = (id) => {
     dispatch(removeCartItem({ id: id }))
@@ -69,8 +71,6 @@ const Cart = () => {
     } else {
       toast.error('Invalid coupon code. Please try again.');
     }
-
-    console.log('appliedCoupon =>', appliedCoupon);
   }
 
 
@@ -85,7 +85,6 @@ const Cart = () => {
 
   const handlePayment = (e) => {
     e.preventDefault()
-    console.log('amount =>', payAmount)
 
     const options = {
       key: process.env.NEXT_PUBLIC_KEY, // Replace with your Razorpay key ID
@@ -93,7 +92,7 @@ const Cart = () => {
       currency: 'INR',
       name: 'AMZY',
       description: 'Test Transaction',
-      image: '../../../Assets/images/amzyLogo.png', // Replace with your logo URL
+      image: logo, // Replace with your logo URL
       handler: function (response) {
         toast.success('Order Placed Successfully!');
         dispatch(setOrderData({ data: cartData }));
@@ -104,9 +103,9 @@ const Cart = () => {
         console.log(response.razorpay_signature);
       },
       prefill: {
-        name: 'Your Name',
-        email: 'email@example.com',
-        contact: '9999999999',
+        name: authUser?.useerName,
+        email: authUser?.userEmail,
+        contact: authUser?.userNumber,
       },
       notes: {
         address: 'Your Address',
