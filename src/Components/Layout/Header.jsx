@@ -47,6 +47,7 @@ const Header = () => {
 
   const handleCartNavigate = () => {
     dispatch(setIsCartLink({ data: true }))
+    handleClose()
   }
 
   return (
@@ -90,7 +91,7 @@ const Header = () => {
                   <Dropdown>
                     <Dropdown.Toggle variant="danger" id="dropdown-basic">
                       {
-                        authUser.userName ? <span className='text-light'>{authUser.userName}</span> : <span className='text-light'>{authUser.userEmail}</span>
+                        authUser.userName ? <span className='text-light'>{authUser.userName}</span> : <span className='text-light'>{authUser.userEmail.slice(0,12)}..</span>
                       }
                     </Dropdown.Toggle>
 
@@ -147,7 +148,7 @@ const Header = () => {
                       <Dropdown>
                         <Dropdown.Toggle variant="danger" id="dropdown-basic">
                           {
-                            authUser.userName ? <span className='text-light'>{authUser.userName}</span> : <span className='text-light'>{authUser.userEmail}</span>
+                            authUser.userName ? <span className='text-light'>{authUser.userName}</span> : <span className='text-light'>{authUser.userEmail.slice(0,12)}..</span>
                           }
                         </Dropdown.Toggle>
 

@@ -11,6 +11,7 @@
 :root {
   --secondary-color: #030330;
   --primary-color: #dc3545;
+  --border-color: #dee2e6;
 }
 
 body {
@@ -104,7 +105,8 @@ header .navbar ul a:hover,
   color: var(--primary-color);
 }
 
-header .navbar .active {
+header .navbar .active,
+.offcanvas .active {
   color: var(--primary-color);
 }
 
@@ -120,7 +122,7 @@ header .rightDiv .searchBar {
 }
 
 header .rightDiv .searchBar input,
-.offcanvas .searchBar input {
+.offcanvas .searchBar input{
   background-color: #f8f9fad9;
   border: 1px solid var(--primary-color);
   border-radius: 6px;
@@ -189,7 +191,7 @@ header .rightDiv .searchBar input:focus-visible {
 }
 
 .offcanvas .searchBar input {
-  border: 1px solid lightgray;
+  border: 1px solid var(--border-color);
 }
 
 .offcanvas .searchBar span {
@@ -267,7 +269,7 @@ header .rightDiv .searchBar input:focus-visible {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  border-right: 1px solid lightgray;
+  border-right: 1px solid var(--border-color);
   width: 200px;
   padding-left: 10px;
 }
@@ -594,7 +596,7 @@ header .rightDiv .searchBar input:focus-visible {
   font-weight: 700;
 }
 
-.card .cartBtn ,
+.card .cartBtn,
 .goTopBtn {
   background-color: var(--primary-color);
   border: none;
@@ -1229,7 +1231,8 @@ header .rightDiv .searchBar input:focus-visible {
 /* upcomingSale ends here  */
 
 footer {
-  background-color: #eeeeeeb8; ;
+  background-color: #eeeeeeb8;
+  ;
   padding-bottom: 50px;
 }
 
@@ -1276,15 +1279,16 @@ footer .contactDetails div {
   gap: 20px;
 }
 
-footer .contactDetails span ,
+footer .contactDetails span,
 footer .contactDetails a {
   color: #4c4a4a;
   font-weight: bolder;
   transition: all 0.3s;
 }
+
 footer .contactDetails span:hover,
-footer .contactDetails a:hover{
-color: var(--primary-color);
+footer .contactDetails a:hover {
+  color: var(--primary-color);
 }
 
 footer .contactDetails .contactIcons {
@@ -1379,12 +1383,17 @@ footer .rightDiv .wrapper .paymentGatewaysImg {
   color: gray;
 }
 
-.inputWrapper input {
-  border: 1px solid lightgray;
+.inputWrapper input ,
+.addressInput {
+  border: 1px solid var(--border-color);
   border-radius: 8px;
   color: var(--secondary-color);
   padding: 8px;
   width: 100%;
+}
+
+.addressInput{
+  border: 2px solid var(--border-color);
 }
 
 .inputWrapper input:focus {
@@ -1562,7 +1571,16 @@ footer .rightDiv .wrapper .paymentGatewaysImg {
 .wishlistDataWrapper img {
   height: 150px;
   width: 150px;
-  border: 1px solid gray;
+  border: 1px solid var(--border-color);
+}
+
+.wishlistDataWrapper .cardWrapper {
+  border-bottom: 1px solid var(--border-color);
+  position: relative;
+}
+
+.wishlistDataWrapper .lastCard {
+  border: none !important;
 }
 
 .wishlistDataWrapper .card {
@@ -1572,6 +1590,7 @@ footer .rightDiv .wrapper .paymentGatewaysImg {
   justify-content: start;
   gap: 40px;
   box-shadow: none;
+  padding: 12px 0px;
 }
 
 .wishlistDataWrapper .card:hover {
@@ -1595,56 +1614,32 @@ footer .rightDiv .wrapper .paymentGatewaysImg {
 }
 
 .wishlistDataWrapper .productDetailsWrapper .productName,
-.wishlistDataWrapper .rightDivWrapper span {
+.wishlistDataWrapper .removeIcon span {
   color: var(--secondary-color);
   font-size: 24px;
   font-weight: 600;
 }
 
-.wishlistDataWrapper .rightDivWrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  gap: 40px;
+.wishlistDataWrapper .removeIcon span {
+  position: absolute;
+  top: 12px;
+  right: 24px;
 }
 
-.wishlistDataWrapper .quantityWrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
+.wishlistDataWrapper .removeIcon span {
+  color: var(--primary-color);
+  font-size: 28px;
+  cursor: pointer;
 }
 
-.wishlistDataWrapper .quantityWrapper input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
-.wishlistDataWrapper .quantityWrapper button,
-.wishlistDataWrapper .quantityWrapper input {
-  background-color: #dee2e6;
-  border: none;
-  width: 30px;
-  height: 35px;
-  border-radius: 6px;
-  font-size: 20px;
-  color: var(--secondary-color);
-  text-align: center;
-}
-
-.wishlistDataWrapper .quantityWrapper input {
-  width: 100%;
-}
-
 @media screen and (max-width: 1199px) {
-  .wishlistDataWrapper .wishlistRow .col-lg-6 {
-    width: 100%;
-  }
 
-  .wishlistDataWrapper .card,
-  .wishlistDataWrapper .rightDivWrapper {
+  .wishlistDataWrapper .card {
     align-items: flex-start;
     justify-content: flex-start;
   }
@@ -1652,10 +1647,6 @@ input::-webkit-inner-spin-button {
   .wishlistDataWrapper .card {
     gap: 50px;
     align-items: center;
-  }
-
-  .wishlistDataWrapper .rightDivWrapper {
-    gap: 30px;
   }
 }
 
@@ -1690,7 +1681,7 @@ input::-webkit-inner-spin-button {
 #cart table img {
   width: 70px;
   height: auto;
-  border: 1px solid gray;
+  border: 1px solid var(--border-color);
   border-radius: 12px;
   margin-top: 12px;
 }
@@ -1897,7 +1888,7 @@ input::-webkit-inner-spin-button {
   gap: 20px 0px;
   padding: 12px 0px;
   padding-bottom: 26px;
-  border-bottom: 1px solid lightgray;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .couponsContainer .lastCard {
@@ -2219,13 +2210,13 @@ input::-webkit-inner-spin-button {
 
 .productDetailPage .imgsWrapper img {
   border-radius: 12px;
-  border: 0.5px solid lightgray;
+  border: 0.5px solid var(--border-color);
 }
 
 
 .productDetailPage .imgsWrapper .prevImg img {
   width: 100%;
-  height: 70vh;
+  height: 72vh;
 }
 
 .productDetailPage .imgsWrapper .otherImgs {
@@ -2233,7 +2224,7 @@ input::-webkit-inner-spin-button {
   align-items: center;
   justify-content: start;
   gap: 12px;
-  margin-top: 12px;
+  margin-top: 24px;
 }
 
 .productDetailPage .imgsWrapper .otherImgs img {
@@ -2244,60 +2235,180 @@ input::-webkit-inner-spin-button {
 .productDetailPage .detailsWrapper {
   display: flex;
   flex-direction: column;
+  gap: 24px;
+}
+
+.productDetailPage .detailsWrapper .upperDiv {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 20px;
+}
+
+.productDetailPage .detailsWrapper .upperDiv .itemTitle {
+  font-size: 32px;
+  color: var(--secondary-color);
+  font-weight: 600;
+}
+
+.productDetailPage .detailsWrapper .upperDiv .ratingWrapper {
+  display: flex;
+  align-items: center;
   gap: 30px;
 }
 
-.productDetailPage .detailsDiv {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+.productDetailPage .detailsWrapper .upperDiv .ratingWrapper .stock {
+  border-left: 1px solid var(--border-color);
+  padding-left: 20px;
+  color: #26a541;
 }
 
-.productDetailPage .heading {
-  color: gray;
-  font-size: 24px;
-  font-weight: 600;
-  text-decoration: underline;
-}
-
-.productDetailPage .detailsDiv span:last-child {
-  color: #000000;
+.productDetailPage .detailsWrapper .upperDiv .price {
   font-size: 28px;
+  color: var(--secondary-color);
   font-weight: 700;
 }
 
-.productDetailPage .inputBox {
+.productDetailPage .detailsWrapper .upperDiv p {
+  margin-top: 10px;
+  margin-bottom: 0px;
+  color: gray;
+  font-weight: 500;
+}
+
+.productDetailPage .detailsWrapper .middleDiv {
   display: flex;
-  gap: 30px;
+  flex-direction: column;
+  gap: 26px;
 }
 
-.productDetailPage .inputBox select,
-.productDetailPage .inputBox input {
-  background-color: transparent;
-  border: 1px solid gray;
-  border-radius: 8px;
-  padding: 6px 12px;
+.productDetailPage .detailsWrapper .middleDiv .labelSpan {
+  color: var(--secondary-color);
+  font-weight: 500;
+  font-size: 18px;
+  margin-right: 12px;
 }
 
-.productDetailPage .detailsWrapper .btn {
-  width: 50%;
-  font-size: 20px;
+.productDetailPage .detailsWrapper .middleDiv .color {
+  width: 16px;
+  height: 16px;
+  border-radius: 100px;
+  border: 2px solid transparent;
+  cursor: pointer;
+}
+
+.productDetailPage .detailsWrapper .middleDiv .selectedColor {
+  border: 2px solid #000;
+  width: 18px;
+  height: 18px;
+}
+
+.productDetailPage .detailsWrapper .middleDiv .size {
+  border: 2px solid var(--border-color);
+  border-radius: 6px;
+  width: 40px;
+  line-height: 36px;
+  text-align: center;
+  color: var(--secondary-color);
   font-weight: 600;
-  padding: 8px 0px;
+  cursor: pointer;
 }
 
-.productDetailPage .productDetailsWrapper {
+.productDetailPage .detailsWrapper .middleDiv .selectedSize {
+  background-color: var(--primary-color);
+  color: #fff;
+  border: 2px solid transparent;
+}
+
+.productDetailPage .detailsWrapper .middleDiv .btnWrapper {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.productDetailPage .detailsWrapper .middleDiv .btnWrapper .btn {
+  width: 200px;
+  height: 44px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.productDetailPage .detailsWrapper .bottomDiv {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  border: 2px solid var(--border-color);
+  padding: 12px;
+  border-radius: 6px;
 }
 
-.productDetailPage .productDetailsWrapper .detailSpan {
-  font-size: 18px;
-  font-weight: 600;
-  color: gray;
+.noDataImg{
+  max-width: 100%;
+  height: auto;
+  border: none !important;
 }
 
-.productDetailPage .productDetailsWrapper .detailSpan span {
-  color: #000000;
+@media screen and (max-width: 575px) {
+  .productDetailPage .imgsWrapper .prevImg img {
+    height: 100%;
+  }
+
+  .productDetailPage .imgsWrapper .otherImgs img {
+    width: 50px;
+    height: 60px;
+  }
+
+  .productDetailPage .detailsWrapper .upperDiv .itemTitle {
+    font-size: 26px;
+  }
+
+  .productDetailPage .detailsWrapper .upperDiv .ratingWrapper {
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .productDetailPage .detailsWrapper .upperDiv .ratingWrapper .stock {
+    border-left: 1px solid transparent;
+    padding-left: 0;
+  }
+
+  .productDetailPage .detailsWrapper .upperDiv .price {
+    font-size: 24px;
+  }
+
+  .productDetailPage .detailsWrapper .middleDiv .labelSpan {
+    margin-right: 2px;
+  }
+
+  .productDetailPage .detailsWrapper .middleDiv .btnWrapper {
+    justify-content: center;
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+
+  .productDetailPage .detailsWrapper .middleDiv .btnWrapper .btn {
+    height: 100%;
+    font-size: 16px;
+  }
+
+  .userProfile {
+    padding-bottom: 50px;
+  }
+
+  .userProfile .profileDataWrapper ,
+  .userProfile .profileDataWrapper .form-control{
+    padding: 0px;
+    margin-left: 2px;
+  }
+
+  .wishlistDataWrapper img {
+    height: 100%;
+    width: 100%;
+  }
+
+  .wishlistDataWrapper .removeIcon span {
+    top: auto;
+    bottom: 18px;
+  }
 }

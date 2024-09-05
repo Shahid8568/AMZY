@@ -66,7 +66,7 @@ const CommonCard = ({ product, sectionTitle, brand, title, img, price, offerPric
                         </div>
                     </div>
                     <div className="priceWrapper row">
-                        <div className="col-lg-9 d-flex flex-column gap-2 align-items-start">
+                        <div className="col-9 d-flex flex-column gap-2 align-items-start">
                             <div className='d-flex align-items-center gap-2'>
                                 {price &&
                                     <span className='cutPrice'>
@@ -80,7 +80,7 @@ const CommonCard = ({ product, sectionTitle, brand, title, img, price, offerPric
                                 </span>
                             </div>
                         </div>
-                        <div className="col-lg-3 d-flex align-items-end justify-content-end">
+                        <div className="col-3 d-flex align-items-end justify-content-end">
                             <button className='cartBtn' onClick={addToCart}><FaCartPlus /></button>
                         </div>
                     </div>

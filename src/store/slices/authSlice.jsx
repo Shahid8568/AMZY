@@ -6,6 +6,7 @@ const initialState = {
     userName: '',
     userEmail: '',
     userNumber: '',
+    userAddress: '',
 }
 
 export const authSlice = createSlice({
@@ -27,11 +28,12 @@ export const authSlice = createSlice({
             // console.log('logOutState', state.isLogIn)
         },
         userProfile: (state, action) => {
-            const { name, email, number } = action.payload;
+            const { name, email, number,address } = action.payload;
             console.log('userSLiceUSerName', name)
             state.userName = name;
             state.userProfile = email;
             state.userNumber = number;
+            state.userAddress = address;
         }
     }
 
