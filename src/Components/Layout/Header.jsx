@@ -91,7 +91,7 @@ const Header = () => {
                   <Dropdown>
                     <Dropdown.Toggle variant="danger" id="dropdown-basic">
                       {
-                        authUser.userName ? <span className='text-light'>{authUser.userName}</span> : <span className='text-light'>{authUser.userEmail.slice(0,12)}..</span>
+                        authUser.userName ? <span className='text-light'>{authUser.userName.slice(0,12)}</span> : <span className='text-light'>{authUser.userEmail.slice(0,12)}..</span>
                       }
                     </Dropdown.Toggle>
 

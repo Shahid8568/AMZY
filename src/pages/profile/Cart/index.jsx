@@ -218,7 +218,7 @@ const Cart = () => {
                 </table>
               </div>
               <div className="col-12">
-                <button className="btn btn-danger" style={{ display: "block", margin: "auto", marginTop: "2%", marginBottom: '6%' }}
+                <button className="btn btn-danger d-block mt-4 mb-5 mx-auto"
                   onClick={clearCartData}
                 >Clear Cart</button>
               </div>

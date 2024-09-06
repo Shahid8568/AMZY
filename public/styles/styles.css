@@ -85,9 +85,19 @@ header .navbar ul li,
   list-style: none;
 }
 
+@media screen and (min-width: 1200px) and (max-width:1399px) {
+  header .navbar ul {
+    gap: 40px;
+  }
+}
+
 @media screen and (min-width: 992px) and (max-width:1199px) {
   header .navbar ul {
-    gap: 50px;
+    gap: 36px;
+  }
+
+  .searchBar input{
+    width: 160px;
   }
 }
 
@@ -107,7 +117,7 @@ header .navbar ul a:hover,
 
 header .navbar .active,
 .offcanvas .active {
-  color: var(--primary-color);
+  color: var(--primary-color) !important;
 }
 
 header .rightDiv {
@@ -122,7 +132,7 @@ header .rightDiv .searchBar {
 }
 
 header .rightDiv .searchBar input,
-.offcanvas .searchBar input{
+.offcanvas .searchBar input {
   background-color: #f8f9fad9;
   border: 1px solid var(--primary-color);
   border-radius: 6px;
@@ -1383,7 +1393,7 @@ footer .rightDiv .wrapper .paymentGatewaysImg {
   color: gray;
 }
 
-.inputWrapper input ,
+.inputWrapper input,
 .addressInput {
   border: 1px solid var(--border-color);
   border-radius: 8px;
@@ -1392,7 +1402,7 @@ footer .rightDiv .wrapper .paymentGatewaysImg {
   width: 100%;
 }
 
-.addressInput{
+.addressInput {
   border: 2px solid var(--border-color);
 }
 
@@ -1424,7 +1434,7 @@ footer .rightDiv .wrapper .paymentGatewaysImg {
 }
 
 .userProfile .tabsDiv {
-  padding: 12px;
+  padding: 12px 10px;
   border-radius: 12px;
   position: relative;
   overflow: hidden;
@@ -1686,16 +1696,18 @@ input::-webkit-inner-spin-button {
   margin-top: 12px;
 }
 
-#cart table td:nth-child(1) {
+/* #cart table td:nth-child(1) {
   width: 100px;
   text-align: center;
-}
+} */
 
 #cart table td {
   margin: 0 50px;
+  width: max-content;
+  text-align: center;
 }
 
-#cart table td:nth-child(2) {
+/* #cart table td:nth-child(2) {
   width: 250px;
   text-align: center;
 }
@@ -1710,7 +1722,7 @@ input::-webkit-inner-spin-button {
 #cart table td:nth-child(6) {
   width: 150px;
   text-align: center;
-}
+} */
 
 #cart input {
   padding: 5px 10px;
@@ -1744,6 +1756,48 @@ input::-webkit-inner-spin-button {
 #cart table tbody td {
   font-size: 17px;
   font-weight: bold;
+  text-wrap: balance;
+}
+
+@media screen and (max-width: 1199px) {
+  #cart table tbody td {
+    font-size: 14px;
+  }
+
+  #cart input {
+    width: 40px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+
+  #cart {
+    overflow: hidden;
+    overflow-x: scroll;
+  }
+
+  #cart table td:nth-child(1) {
+    width: 100px;
+    text-align: center;
+  }
+
+  #cart table td:nth-child(2),
+  #cart table td:nth-child(3) {
+    width: 120px;
+    text-align: center;
+  }
+
+  #cart table td:nth-child(4),
+  #cart table td:nth-child(5),
+  #cart table td:nth-child(6) {
+    width: 124px;
+  }
+
+  #cart table tbody td {
+    font-size: 14px;
+  }
+
+
 }
 
 .cartDataWrapper .btn {
@@ -1835,42 +1889,38 @@ input::-webkit-inner-spin-button {
   border: none;
 }
 
-@media screen and (max-width: 450px),
-(max-width: 540px),
-(max-width: 280px) {
+@media screen and (max-width: 575px) {
   #cart {
     padding: 0;
-    overflow-x: auto;
   }
 
-  #cart h1 {
+  #cart table td:nth-child(1) ,
+  #cart table td:nth-child(2) {
+    width: 140px;
     text-align: center;
-    margin-top: 45px;
-  }
+}
 
   #cart-tot {
     flex-wrap: wrap;
+    padding: 0px;
   }
 
-  #coupon {
+  #cart-tot h3{
+    font-size: 22px;
+  }
+
+  #coupon ,
+  .couponbtn{
     width: 100%;
   }
 
   #coupon input {
     margin-bottom: 12px;
-    width: 125px;
+    width: 100%;
   }
 
   #subtot {
     width: 100%;
-  }
-}
-
-@media screen and (max-width: 280px) {
-  #subtot {
-    width: 150px;
-    margin-left: -82%;
-    margin-bottom: -28vh;
   }
 }
 
@@ -2343,7 +2393,7 @@ input::-webkit-inner-spin-button {
   border-radius: 6px;
 }
 
-.noDataImg{
+.noDataImg {
   max-width: 100%;
   height: auto;
   border: none !important;
@@ -2396,8 +2446,8 @@ input::-webkit-inner-spin-button {
     padding-bottom: 50px;
   }
 
-  .userProfile .profileDataWrapper ,
-  .userProfile .profileDataWrapper .form-control{
+  .userProfile .profileDataWrapper,
+  .userProfile .profileDataWrapper .form-control {
     padding: 0px;
     margin-left: 2px;
   }
@@ -2411,4 +2461,5 @@ input::-webkit-inner-spin-button {
     top: auto;
     bottom: 18px;
   }
+
 }

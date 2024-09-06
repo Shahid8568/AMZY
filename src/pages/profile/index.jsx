@@ -105,7 +105,7 @@ const Index = () => {
       <section className="userProfile commonMT">
         <div className="container">
           <div className="row tabAndContentWrapper">
-            <div className="col-12 col-lg-2">
+            <div className="col-12 col-xl-2">
               <div className="tabsDiv">
                 <div className="tabsWrapper">
                   <div className='tab-headers'>
@@ -124,7 +124,7 @@ const Index = () => {
 
             </div>
 
-            <div className="col-12 col-lg-10">
+            <div className="col-12 col-xl-10">
               <div className='contentDiv '>
                 {/* Content based on active tab */}
                 {activeTab === 'My Profile' && (
