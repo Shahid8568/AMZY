@@ -89,6 +89,11 @@ export const cartDataSelector = createSelector(
     (UserProducts) => UserProducts.cartData
 );
 
+export const cartCountSelector = createSelector(
+    (state) => state.UserProducts,
+    (UserProducts) => UserProducts.cartData.length
+);
+
 export const isCartLinkSelector = createSelector(
     (state) => state.UserProducts,
     (UserProducts) => UserProducts.isCartLink

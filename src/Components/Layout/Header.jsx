@@ -3,19 +3,22 @@ import React, { useState } from 'react';
 import Image from 'next/image'
 import navLogo from '../../Assets/images/amzyLogo.png'
 import Link from 'next/link'
-import { FaCartPlus, FaSearch, } from "react-icons/fa";
-import Dropdown from 'react-bootstrap/Dropdown';
+import { FaShoppingCart, FaSearch, } from "react-icons/fa";
+// import Dropdown from 'react-bootstrap/Dropdown';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import { IoReorderThree } from "react-icons/io5";
 import LoginModal from '../Auth/LoginModal';
 import SignUp from '../Auth/SignUpModal';
 import { auth } from '../../Firebase'
 import { useDispatch, useSelector } from 'react-redux';
-import { userLogOut } from '../../store/slices/authSlice.jsx';
+import { userLogOut, userSelector } from '../../store/slices/authSlice.jsx';
 import { signOut } from 'firebase/auth'
 import toast from 'react-hot-toast';
-import { setIsCartLink } from '@/store/slices/UserProducts';
+import { cartCountSelector, setIsCartLink } from '@/store/slices/UserProducts';
 import { useRouter } from 'next/router';
+import SearchBar from '../SearchBar';
+import { Dropdown, Space } from 'antd/lib';
+import { FaAngleDown } from "react-icons/fa";
 
 const Header = () => {
 
@@ -26,15 +29,14 @@ const Header = () => {
   const [modalSignUp, setModalSignUp] = useState(false);
   const dispatch = useDispatch()
 
-  const authUser = useSelector(state => state.authSlice)
-  const user = useSelector(state => state.authSlice.isLogIn)
+  const authUser = useSelector(userSelector)
+  const user = authUser.isLogIn
+  const cartCount = useSelector(cartCountSelector)
 
   const isVerified = authUser.isVerified;
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
-
 
   const userSignOut = () => {
     signOut(auth).then(() => {
@@ -49,6 +51,26 @@ const Header = () => {
     dispatch(setIsCartLink({ data: true }))
     handleClose()
   }
+
+
+  const items = [
+    {
+      label: (
+        <Link href={'/profile'}>
+          Profile
+        </Link>
+      ),
+      key: '0',
+    },
+    {
+      label: (
+        <span onClick={userSignOut}>
+          Logout
+        </span>
+      ),
+      key: '1',
+    },
+  ];
 
   return (
     <>
@@ -72,9 +94,13 @@ const Header = () => {
                 <li>
                   <Link href="/women" className={`${router.pathname === '/women' ? 'active' : ''}`}>Women</Link>
                 </li>
-                <li onClick={handleCartNavigate}>
-                  <Link href="/profile" className={`${router.pathname === '' ? 'active' : ''}`}>
-                    <FaCartPlus /> Cart
+                <li onClick={handleCartNavigate} >
+                  <Link href="/profile" className={`${router.pathname === '' ? 'active' : ''} cartIconWrapper`}>
+                    Cart <FaShoppingCart size={22} />
+                    {
+                      cartCount > 0 &&
+                      <span className='cartBadge'>{cartCount}</span>
+                    }
                   </Link>
                 </li>
               </ul>
@@ -82,27 +108,30 @@ const Header = () => {
           </div>
           <div className="rightDiv">
             <div className="searchBar">
-              <input type="text" placeholder='Search' />
-              <span><FaSearch /></span>
+              <SearchBar handleClose={handleClose} />
             </div>
             <div className="profileTab">
+
               {
                 user ?
-                  <Dropdown>
-                    <Dropdown.Toggle variant="danger" id="dropdown-basic">
-                      {
-                        authUser.userName ? <span className='text-light'>{authUser.userName.slice(0,12)}</span> : <span className='text-light'>{authUser.userEmail.slice(0,12)}..</span>
-                      }
-                    </Dropdown.Toggle>
-
-                    <Dropdown.Menu>
-                      <Link href={'/profile'}>
-                        <Dropdown.Item href='/profile'>Profile</Dropdown.Item>
-                      </Link>
-                      <Dropdown.Item onClick={userSignOut}>LogOut</Dropdown.Item>
-                    </Dropdown.Menu>
+                  <Dropdown
+                    menu={{
+                      items,
+                    }}
+                  >
+                    <a onClick={(e) => e.preventDefault()}>
+                      <Space>
+                        {
+                          authUser.userName ? <span className='text-light'>{authUser.userName?.length > 12 ? authUser?.userName.slice(0, 12) + '..' : authUser?.userName}</span> : <span className='text-light'>{authUser.userEmail.slice(0, 12)}..</span>
+                        }
+                        <FaAngleDown />
+                      </Space>
+                    </a>
                   </Dropdown>
-                  : <span className='btn btn-danger text-light' onClick={() => setModalShow(true)}>Login/Sign Up</span>
+                  : <div>
+                    <span className='btn btn-danger text-light' onClick={() => setModalShow(true)}>Login</span>
+                    <span className='btn btn-danger text-light ms-2' onClick={() => setModalSignUp(true)}>Sign Up</span>
+                  </div>
               }
             </div>
           </div>
@@ -129,9 +158,13 @@ const Header = () => {
                     <li onClick={handleClose}>
                       <Link href="/women" className={`${router.pathname === '/women' ? 'active' : ''}`}>Women</Link>
                     </li>
-                    <li onClick={handleCartNavigate}>
-                      <Link href="/profile" className={`${router.pathname === '' ? 'active' : ''}`}>
-                        <FaCartPlus /> Cart
+                    <li onClick={handleCartNavigate} >
+                      <Link href="/profile" className={`${router.pathname === '' ? 'active' : ''} cartIconWrapper`}>
+                        Cart <FaShoppingCart size={22} />
+                        {
+                          cartCount > 0 &&
+                          <span className='cartBadge'>{cartCount}</span>
+                        }
                       </Link>
                     </li>
                   </ul>
@@ -139,25 +172,24 @@ const Header = () => {
               </div>
               <div className="rightDiv">
                 <div className="searchBar">
-                  <input type="text" placeholder='Search' />
-                  <span><FaSearch /></span>
+                  <SearchBar handleClose={handleClose} />
                 </div>
                 <div className="profileTab">
                   {
                     user ?
-                      <Dropdown>
-                        <Dropdown.Toggle variant="danger" id="dropdown-basic">
-                          {
-                            authUser.userName ? <span className='text-light'>{authUser.userName}</span> : <span className='text-light'>{authUser.userEmail.slice(0,12)}..</span>
-                          }
-                        </Dropdown.Toggle>
-
-                        <Dropdown.Menu>
-                          <Link href={'/profile'}>
-                            <Dropdown.Item href='/profile'>Profile</Dropdown.Item>
-                          </Link>
-                          <Dropdown.Item onClick={userSignOut}>LogOut</Dropdown.Item>
-                        </Dropdown.Menu>
+                      <Dropdown
+                        menu={{
+                          items,
+                        }}
+                      >
+                        <a onClick={(e) => e.preventDefault()}>
+                          <Space>
+                            {
+                              authUser.userName ? <span className='text-light'>{authUser.userName?.length > 12 ? authUser?.userName.slice(0, 12) + '..' : authUser?.userName}</span> : <span className='text-light'>{authUser.userEmail.slice(0, 12)}..</span>
+                            }
+                            <FaAngleDown />
+                          </Space>
+                        </a>
                       </Dropdown>
                       : <span className='btn btn-danger text-light' onClick={() => setModalShow(true)}>Login/Sign Up</span>
                   }
@@ -169,13 +201,12 @@ const Header = () => {
         </Offcanvas>
       </header >
 
-
       <LoginModal
         show={modalShow}
         setModalSignUp={setModalSignUp}
         onHide={() => setModalShow(false)}
-
       />
+
       <SignUp show={modalSignUp} onHide={() => setModalSignUp(false)} />
 
     </>

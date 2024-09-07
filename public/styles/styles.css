@@ -80,9 +80,25 @@ header .navbar ul {
   padding: 0px;
 }
 
-header .navbar ul li,
-.offcanvas .navbar ul {
+.navbar ul li {
   list-style: none;
+}
+
+.cartIconWrapper {
+  position: relative;
+}
+
+.cartIconWrapper .cartBadge {
+  position: absolute;
+  top: -2px;
+  right: -10px;
+  background-color: var(--primary-color);
+  color: #fff;
+  font-size: 12px;
+  border-radius: 50px;
+  width: 20px;
+  line-height: 20px;
+  text-align: center;
 }
 
 @media screen and (min-width: 1200px) and (max-width:1399px) {
@@ -96,13 +112,12 @@ header .navbar ul li,
     gap: 36px;
   }
 
-  .searchBar input{
+  .searchBar input {
     width: 160px;
   }
 }
 
-header .navbar ul a,
-.offcanvas .navbar ul a {
+.navbar ul a {
   font-size: 20px;
   font-weight: 600;
   color: #000000;
@@ -110,13 +125,11 @@ header .navbar ul a,
   transition: all 0.3s;
 }
 
-header .navbar ul a:hover,
-.offcanvas .navbar ul a:hover {
+.navbar ul a:hover {
   color: var(--primary-color);
 }
 
-header .navbar .active,
-.offcanvas .active {
+.navbar .active {
   color: var(--primary-color) !important;
 }
 
@@ -127,23 +140,70 @@ header .rightDiv {
   gap: 20px;
 }
 
-header .rightDiv .searchBar {
+.searchBar {
   position: relative;
 }
 
-header .rightDiv .searchBar input,
-.offcanvas .searchBar input {
+.searchBar .suggestions {
+  background-color: #fefefe;
+  position: absolute;
+  z-index: 1;
+  width: 242px;
+  height: 500px;
+  overflow-y: scroll;
+  padding: 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+/* width */
+.searchBar .suggestions::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+.searchBar .suggestions::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+/* Handle */
+.searchBar .suggestions::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 10px;
+}
+
+.searchBar .suggestions ul {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 0px;
+}
+
+.searchBar .suggestions ul li {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.searchBar .suggestions ul li img {
+  mix-blend-mode: darken;
+}
+
+.searchBar input {
   background-color: #f8f9fad9;
   border: 1px solid var(--primary-color);
   border-radius: 6px;
   padding: 8px 12px;
   color: var(--secondary-color);
   font-weight: 600;
+  max-width: 100%;
 }
 
-header .rightDiv .searchBar span {
+.searchBar span {
   position: absolute;
-  top: 5px;
+  top: 6px;
   left: auto;
   right: 16px;
   color: var(--secondary-color);
@@ -156,7 +216,19 @@ header .rightDiv .profileTab span {
   border: none;
 }
 
-header .rightDiv .searchBar input:focus-visible {
+.ant-dropdown-trigger{
+  background-color: var(--primary-color);
+  padding: 8px;
+  border-radius: 6px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.ant-dropdown .ant-dropdown-menu .ant-dropdown-menu-item{
+  font-size: 16px !important;
+}
+
+.searchBar input:focus-visible {
   outline: none;
 }
 
@@ -198,21 +270,27 @@ header .rightDiv .searchBar input:focus-visible {
 
 .offcanvas .searchBar {
   margin: 22px 0px;
+  position: relative;
+  width: max-content;
+}
+
+.offcanvas .searchBar .suggestions {
+  height: 300px;
 }
 
 .offcanvas .searchBar input {
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--primary-color);
 }
 
 .offcanvas .searchBar span {
   position: absolute;
   top: 6px;
   left: auto;
-  right: 34px;
+  right: 12px;
 }
 
 .offcanvas.offcanvas-end {
-  width: 64% !important;
+  width: 85% !important;
 }
 
 /* header ends here  */
@@ -504,7 +582,7 @@ header .rightDiv .searchBar input:focus-visible {
 }
 
 .card {
-  border: 1px solid #80808040;
+  border: 1px solid var(--border-color);
   border-radius: 20px;
   margin: 12px 0px;
   gap: 14px;
@@ -558,7 +636,16 @@ header .rightDiv .searchBar input:focus-visible {
 
 .card .productDetails .productName {
   font-weight: 700;
+  text-align: start;
 }
+
+@media screen and (min-width:992px) and (max-width: 1399px) {
+  .card .productDetails .productName {
+    height: 42px;
+  }
+
+}
+
 
 .card .priceWrapper {
   margin-top: 30px;
@@ -901,10 +988,6 @@ header .rightDiv .searchBar input:focus-visible {
     height: 330px;
   }
 
-  .card .productDetails {
-    height: 90px;
-  }
-
   .seasonalSale .dealsDetailsWrapper .buyText {
     font-size: 24px;
   }
@@ -916,11 +999,6 @@ header .rightDiv .searchBar input:focus-visible {
   .seasonalSale .crazyDealsWrapper .dealsDetailsWrapper .title {
     font-size: 22px;
   }
-
-  /* .bigDaysSale .row {
-    height: 72vh;
-  } */
-
 
 }
 
@@ -1242,14 +1320,6 @@ header .rightDiv .searchBar input:focus-visible {
 
 footer {
   background-color: #eeeeeeb8;
-  ;
-  padding-bottom: 50px;
-}
-
-@media screen and (max-width: 1199px) {
-  footer {
-    padding-bottom: 30px;
-  }
 }
 
 footer .row {
@@ -1262,7 +1332,7 @@ footer .centerDiv,
 footer .rightDiv {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: start;
   justify-content: start;
   gap: 20px;
 }
@@ -1317,14 +1387,11 @@ footer .contactDetails .contactIcons2 {
 footer .rightDiv .wrapper {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   gap: 26px;
 }
 
 footer .rightDiv .wrapper span {
   font-weight: 700;
-  margin-left: 24px;
   color: #4c4a4a;
   text-decoration: underline;
   text-decoration-style: double;
@@ -1438,7 +1505,7 @@ footer .rightDiv .wrapper .paymentGatewaysImg {
   border-radius: 12px;
   position: relative;
   overflow: hidden;
-  border: 1px solid #80808040;
+  border: 1px solid var(--border-color);
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
@@ -1481,7 +1548,7 @@ footer .rightDiv .wrapper .paymentGatewaysImg {
 
 .userProfile .contentDiv {
   padding: 16px;
-  border: 1px solid #80808040;
+  border: 1px solid var(--border-color);
   border-radius: 12px;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
@@ -1574,6 +1641,38 @@ footer .rightDiv .wrapper .paymentGatewaysImg {
     flex-wrap: wrap !important;
     gap: 20px !important;
   }
+}
+
+.or {
+  position: relative;
+  width: 100%;
+  text-align: center;
+  overflow: hidden;
+  font-weight: 700;
+  margin-top: -12px;
+}
+
+.or::before,
+.or::after {
+  content: '';
+  position: absolute;
+  top: 10px;
+  width: 42%;
+  height: 3px;
+  background-color: var(--border-color);
+}
+
+.or::before {
+  left: 0px;
+}
+
+.or::after {
+  right: 0px;
+}
+
+.googleBtn svg {
+  margin-top: -2px;
+  margin-right: 4px;
 }
 
 /* userProfile  ends here  */
@@ -1894,23 +1993,23 @@ input::-webkit-inner-spin-button {
     padding: 0;
   }
 
-  #cart table td:nth-child(1) ,
+  #cart table td:nth-child(1),
   #cart table td:nth-child(2) {
     width: 140px;
     text-align: center;
-}
+  }
 
   #cart-tot {
     flex-wrap: wrap;
     padding: 0px;
   }
 
-  #cart-tot h3{
+  #cart-tot h3 {
     font-size: 22px;
   }
 
-  #coupon ,
-  .couponbtn{
+  #coupon,
+  .couponbtn {
     width: 100%;
   }
 
@@ -2278,7 +2377,8 @@ input::-webkit-inner-spin-button {
 }
 
 .productDetailPage .imgsWrapper .otherImgs img {
-  width: 100%;
+  max-width: 100%;
+  object-fit: cover;
   cursor: pointer;
 }
 
@@ -2395,8 +2495,19 @@ input::-webkit-inner-spin-button {
 
 .noDataImg {
   max-width: 100%;
-  height: auto;
+  height: auto !important;
+  width: auto !important;
   border: none !important;
+}
+
+.addressForm{
+  gap: 20px 0px;
+}
+
+.addressForm input:focus,
+.addressForm textarea:focus{
+  outline: none;
+  border: 1px solid var(--primary-color);
 }
 
 @media screen and (max-width: 575px) {

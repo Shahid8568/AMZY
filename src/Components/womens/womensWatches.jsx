@@ -108,7 +108,7 @@ const womensWatches = [
     {
         id: 38,
         cName: "Casio",
-        title: "Analog Black Dial Watch-VT01GL",
+        title: "Black Dial Watch-VT01GL",
         about: "",
         offerPrice: "5,650",
         price: "",

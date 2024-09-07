@@ -1,7 +1,7 @@
 import React from 'react'
 import { FaPhoneAlt } from 'react-icons/fa'
 import { IoIosMail } from "react-icons/io";
-import {  FaLocationDot } from "react-icons/fa6";
+import { FaLocationDot } from "react-icons/fa6";
 import { FaArrowRight } from "react-icons/fa";
 import Image from 'next/image';
 import appStoreImg from '../../Assets/images/appStore.png'
@@ -21,7 +21,7 @@ const Footer = () => {
               <div className="contactDetails">
                 <div>
                   <span className='contactIcons'><FaPhoneAlt /></span>
-                  <Link href={'tel:+0123456789'}> +012-345-6789</Link>
+                  <Link href={'tel:+91 7990501633'}> +91 7990501633</Link>
                 </div>
                 <div>
                   <span className='contactIcons'><FaPhoneAlt /></span>
@@ -29,7 +29,7 @@ const Footer = () => {
                 </div>
                 <div>
                   <span className='contactIcons1 contactIcons'><IoIosMail /></span>
-                  <Link href={'mailto:amzy@gmail.com'}>amzy@gmail.com</Link>
+                  <Link href={'mailto:jagorashahid007@gmail.com'}>jagorashahid007@gmail.com</Link>
                 </div>
                 <div>
                   <span className='contactIcons2 contactIcons'><FaLocationDot /></span>
@@ -90,7 +90,11 @@ const Footer = () => {
             </div>
 
           </div>
+
         </div>
+      </div>
+      <div className="text-center border-top py-4 mt-1">
+      <span>  Copyright © 2024 <span className='text-danger fw-bold'>AMZY</span></span>
       </div>
     </footer>
   )

@@ -5,7 +5,7 @@ import ratingImg from '../Assets/images/Rating.png'
 import { FaCartPlus, FaEye, FaHeart, FaStar } from 'react-icons/fa'
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { useDispatch, useSelector } from 'react-redux'
-import { setWishlistData } from '@/store/slices/UserProducts'
+import { cartDataSelector, setWishlistData, wishlistSelector } from '@/store/slices/UserProducts'
 import toast from 'react-hot-toast'
 import { isLoginSelector } from '@/store/slices/authSlice'
 import { setCartData } from '@/store/slices/UserProducts'
@@ -14,16 +14,28 @@ import { setCartData } from '@/store/slices/UserProducts'
 const CommonCard = ({ product, sectionTitle, brand, title, img, price, offerPrice, id, }) => {
 
     const isLogin = useSelector(isLoginSelector)
+    const cartData = useSelector(cartDataSelector)
+    const wishlistData = useSelector(wishlistSelector)
     const dispatch = useDispatch()
 
     const quantity = 1;
 
+     // Check if the product is already in the wishlist
+     const isInWishlist = wishlistData.find(item => item.id === product.id);
+    
+     // Check if the product is already in the cart
+     const isInCart = cartData.find(item => item.id === product.id);
+
     const addToWishlist = (e) => {
-        e.stopPropagation()
-        // console.log(isLogin)
+        e.preventDefault();
+        e.stopPropagation();
         if (isLogin) {
-            dispatch(setWishlistData({ data: product }))
-            toast.success('Succesfully Added To Wishlist')
+            if (isInWishlist) {
+                toast.error('Item already in Wishlist');
+            } else {
+                dispatch(setWishlistData({ data: product }));
+                toast.success('Item Added To Wishlist');
+            }
         }
         else {
             toast.error('Please Login First')
@@ -31,15 +43,19 @@ const CommonCard = ({ product, sectionTitle, brand, title, img, price, offerPric
     }
 
     const addToCart = (e) => {
-        e.stopPropagation()
-        // console.log(isLogin)
+        e.preventDefault();
+        e.stopPropagation();
         if (isLogin) {
-            const productData = {
-                ...product,
-                quantity,
+            if (isInCart) {
+                toast.error('Item already in Cart');
+            } else {
+                const productData = {
+                    ...product,
+                    quantity,
+                };
+                dispatch(setCartData({ data: productData }));
+                toast.success('Item Added To Cart');
             }
-            dispatch(setCartData({ data: productData }))
-            toast.success('Succesfully Added To Cart')
         }
         else {
             toast.error('Please Login First')
@@ -87,7 +103,8 @@ const CommonCard = ({ product, sectionTitle, brand, title, img, price, offerPric
                 </div>
 
                 <div className="iconsWrapper" onClick={addToWishlist}>
-                    <span className='likeIcpn'><FaHeart /></span>
+                    
+                    <span className='likeIcpn'>{isInWishlist?<FaHeart color='red'/>:<FaHeart />}</span>
                 </div>
 
             </div>

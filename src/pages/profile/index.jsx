@@ -5,9 +5,10 @@ import ProfileBreadcrumb from '@/Components/ProfileBreadcrumb';
 import profileImg from '../../Assets/profileimages/male.svg'
 import Image from 'next/image';
 import { useSelector, useDispatch } from 'react-redux'
-import { userProfile, userLogOut } from '../../store/slices/authSlice.jsx'
+import { userProfile, userLogOut, userSelector } from '../../store/slices/authSlice.jsx'
 import { toast } from 'react-hot-toast'
-import { signOut } from 'firebase/auth'
+import { signOut, deleteUser } from 'firebase/auth'
+import { reauthenticateWithCredential, EmailAuthProvider } from 'firebase/auth';
 import { auth } from '@/Firebase';
 import Cart from './Cart';
 import { useRouter } from 'next/router';
@@ -17,7 +18,7 @@ import Coupons from './Coupons';
 const Index = () => {
 
   const dispatch = useDispatch()
-  const authUser = useSelector(state => state.authSlice)
+  const user = useSelector(userSelector)
 
   const isCartLink = useSelector(isCartLinkSelector)
 
@@ -26,7 +27,7 @@ const Index = () => {
     // console.log(router, 'router')
   }, [router])
 
-  // console.log(authUser)
+  // console.log(user)
 
   const tabs = [
     {
@@ -53,9 +54,9 @@ const Index = () => {
 
   const [activeTab, setActiveTab] = useState('My Profile');
   const [userData, setUserData] = useState({
-    name: authUser.userName,
-    email: authUser.userEmail,
-    number: authUser.userNumber
+    name: user.userName,
+    email: user.userEmail,
+    number: user.userNumber
   })
 
   const handleTabClick = (tab) => {
@@ -63,16 +64,13 @@ const Index = () => {
   };
 
   useEffect(() => {
-    if (activeTab === 'My Profile' || 'Wishlist' || 'My Coupons'){
-      dispatch(setIsCartLink({data: false}))
+    if (activeTab === 'My Profile' || 'Wishlist' || 'My Coupons') {
+      dispatch(setIsCartLink({ data: false }))
     }
-      if (isCartLink) {
-        setActiveTab('Cart')
-      }
+    if (isCartLink) {
+      setActiveTab('Cart')
+    }
   }, [isCartLink])
-
-
-
 
   const updateProfile = (e) => {
     e.preventDefault();
@@ -82,22 +80,47 @@ const Index = () => {
 
 
   const userSignOut = () => {
-    signOut(auth).then(() => {
-      toast.success('Log out Successfully')
-      dispatch(userLogOut(false))
-    }).catch((err) => [
-      console.log(err)
-    ])
+    const user = auth.currentUser;
+    if (!user) {
+      toast.error('Please login first');
+      return;
+    }
+    else {
+      signOut(auth).then(() => {
+        toast.success('Log out Successfully')
+        dispatch(userLogOut(false))
+      }).catch((err) => [
+        console.log(err)
+      ])
+    }
   }
 
   const accDelete = () => {
-    signOut(auth).then(() => {
-      toast.success('Log out Successfully')
-      dispatch(userLogOut(false))
-    }).catch((err) => [
-      console.log(err)
-    ])
-  }
+    const user = auth.currentUser;
+
+    if (!user) {
+      toast.error('Please login first');
+      return;
+    }
+
+    deleteUser(user)
+      .then(() => {
+        toast.success('Account deleted successfully');
+        dispatch(userLogOut(false));
+        router.push('/');  // Redirect to home or login page after deletion
+      })
+      .catch((err) => {
+        // If an error occurs, it might be due to a requirement for re-authentication
+        if (err.code === 'auth/requires-recent-login') {
+          toast.error('You need to log in again to delete your account.');
+          router.push('/login');  // Redirect to login page for re-authentication
+        } else {
+          toast.error('Failed to delete account');
+          console.error(err);
+        }
+      });
+  };
+
 
 
   return (
@@ -111,7 +134,7 @@ const Index = () => {
                   <div className='tab-headers'>
                     {
                       tabs?.map((data) => {
-                        return <div className={`tab-header ${activeTab === data.tab ? 'active' : ''}`} onClick={() => handleTabClick(data.tab)}>
+                        return <div className={`tab-header ${activeTab === data.tab ? 'active' : ''}`} onClick={() => handleTabClick(data.tab)} key={data.id}>
                           <span>
                           </span>
                           <span>{data.tab}</span>
@@ -139,7 +162,7 @@ const Index = () => {
                           </div>
                           <div className='nameWrapper'>
                             <span>Hello,  </span>
-                            <span>{authUser.userName ? authUser.userName : 'Guest'}</span>
+                            <span>{user.userName ? user.userName : 'Guest'}</span>
                           </div>
 
                         </div>
@@ -196,12 +219,12 @@ const Index = () => {
                 )}
                 {activeTab === 'My Coupons' && (
                   <div className='row cartDataWrapper'>
-                    <Coupons/>
+                    <Coupons />
                   </div>
                 )}
                 {activeTab === 'My Orders' && (
                   <div className='row wishlistDataWrapper'>
-                    <Wishlist ordersTab={true}/>
+                    <Wishlist ordersTab={true} />
                   </div>
                 )}
 

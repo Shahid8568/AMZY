@@ -37,10 +37,9 @@ const Wishlist = ({ ordersTab }) => {
       <div className="row wishlistRow">
         <ProfileBreadcrumb title={ordersTab ? 'My Orders' : 'Wishlist'} />
         {
-          data?.length < 0 ?
+          data?.length > 0 ?
             data?.map((item, index) => {
-              return <>
-                <div className={`col-12 cardWrapper ${data?.length - 1 === index ? 'lastCard' : ''}`}>
+              return <div className={`col-12 cardWrapper ${data?.length - 1 === index ? 'lastCard' : ''}`} key={index}>
                   <div className={`card`}>
                     <div>
                       <img src={item?.img?.src} alt="productImg" />
@@ -96,7 +95,7 @@ const Wishlist = ({ ordersTab }) => {
                   }
                 </div>
 
-              </>
+              
             })
             :
             <NoDataFound />

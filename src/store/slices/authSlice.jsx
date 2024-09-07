@@ -7,6 +7,9 @@ const initialState = {
     userEmail: '',
     userNumber: '',
     userAddress: '',
+    userPincode: '',
+    userState: '',
+    userCity: '',
 }
 
 export const authSlice = createSlice({
@@ -20,6 +23,8 @@ export const authSlice = createSlice({
             state.isLogIn = true;
             state.isVerified = user.emailVerified
             state.userEmail = user.email;
+            state.userName = user.displayName;
+            state.userAddress = '';
         },
         userLogOut: (state, action) => {
             const isLogIn = action.payload;
@@ -28,12 +33,15 @@ export const authSlice = createSlice({
             // console.log('logOutState', state.isLogIn)
         },
         userProfile: (state, action) => {
-            const { name, email, number,address } = action.payload;
-            console.log('userSLiceUSerName', name)
+            const { name, email, number,address,pincode,userState,city, } = action.payload;
             state.userName = name;
             state.userProfile = email;
             state.userNumber = number;
             state.userAddress = address;
+            state.userPincode = pincode;
+            state.userCity = city;
+            state.userState = userState;
+
         }
     }
 
@@ -44,6 +52,11 @@ export const { userSignUp, userSignIn, userLogOut, userProfile } = authSlice.act
 export const isLoginSelector = createSelector(
     (state) => state.authSlice,
     (authSlice) => authSlice.isLogIn
+);
+
+export const userSelector = createSelector(
+    (state) => state.authSlice,
+    (authSlice) => authSlice
 );
 
 export default authSlice.reducer

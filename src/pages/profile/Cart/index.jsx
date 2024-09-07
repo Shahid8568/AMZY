@@ -6,13 +6,14 @@ import { useDispatch, useSelector } from 'react-redux'
 import { cartDataSelector, couponsSelector, removeCartItem, setOrderData, updateQuantity } from '@/store/slices/UserProducts'
 import toast from 'react-hot-toast'
 import { useRouter } from 'next/router';
-import logo from '../../../Assets/images/amzyLogo.png'
+import logo from '../../../Assets/images/G-logo.png'
 import NoDataFound from '@/Components/NoDataFound';
-import AddressModal from './AddressModal';
-import { userAddressSelector, userProfile } from '@/store/slices/authSlice';
+import { userProfile, userSelector } from '@/store/slices/authSlice';
 import { Modal } from 'react-bootstrap';
 
 const Cart = () => {
+
+  const user = useSelector(userSelector)
 
   const router = useRouter();
   const cartData = useSelector(cartDataSelector)
@@ -24,9 +25,16 @@ const Cart = () => {
 
   const [payAmount, setPayAmount] = useState(null)
 
-  const authUser = useSelector(state => state.authSlice)
+  const [userData, setUserData] = useState({
+    pincode: user.userPincode,
+    number: user.userNumber,
+    state: user.userState,
+    city: user.userCity,
+    address: user.userAddress,
+  })
 
-  const userAddress = authUser.userAddress
+
+  const data = userData.address && userData.city && userData.number && userData.pincode && userData.state;
 
   const [show, setShow] = useState(false);
 
@@ -95,36 +103,35 @@ const Cart = () => {
   }, [payAmount])
 
   useEffect(() => {
-  }, [userAddress])
-  
+  }, [data])
+
 
 
   const handlePayment = () => {
-    toast.success(userAddress?.length)
-    if (userAddress?.length === 0) {
+    if (!data) {
       handleShow()
     }
     else {
       const options = {
-        key: process.env.NEXT_PUBLIC_KEY, // Replace with your Razorpay key ID
-        amount: payAmount * 100, // Amount is in the smallest currency unit (e.g., 50000 paise = INR 500)
+        key: process.env.NEXT_PUBLIC_KEY, 
+        amount: payAmount * 100, 
         currency: 'INR',
         name: 'AMZY',
         description: 'Test Transaction',
-        image: logo, // Replace with your logo URL
+        image: logo.src,
         handler: function (response) {
           toast.success('Order Placed Successfully!');
           dispatch(setOrderData({ data: cartData }));
           router.push('/')
           clearCartData(true);
-          console.log(response.razorpay_payment_id);
-          console.log(response.razorpay_order_id);
-          console.log(response.razorpay_signature);
+          // console.log(response.razorpay_payment_id);
+          // console.log(response.razorpay_order_id);
+          // console.log(response.razorpay_signature);
         },
         prefill: {
-          name: authUser?.useerName,
-          email: authUser?.userEmail,
-          contact: authUser?.userNumber,
+          name: user?.userName,
+          email: user?.userEmail,
+          contact: user?.userNumber,
         },
         notes: {
           address: 'Your Address',
@@ -147,11 +154,11 @@ const Cart = () => {
     calculateCartTotal();
   }, [cartData, appliedCoupon]);
 
-  const [address, setAddress] = useState('')
 
   const handleAddress = () => {
-    if (address) {
-      dispatch(userProfile({ address: address }))
+
+    if (data) {
+      dispatch(userProfile({ address: userData.address, number: userData.number, userState: userData.state, pincode: userData.pincode, city: userData.city }))
       toast.success('Address Added!')
       handleClose()
       setTimeout(() => {
@@ -164,6 +171,19 @@ const Cart = () => {
 
   }
 
+  const handlePincodeChange = (e) => {
+    const pincode = e.target.value;
+    if (pincode.length <= 6) {
+      setUserData({ ...userData, pincode });
+    }
+  };
+
+  const handleNumberChange = (e) => {
+    const number = e.target.value;
+    if (number.length <= 10) {
+      setUserData({ ...userData, number });
+    }
+  };
 
   return (
     <>
@@ -265,9 +285,31 @@ const Cart = () => {
                           <Modal.Title>Please Enter Your Address</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
-                          <input type="text" className='addressInput' value={address} placeholder='Address' onChange={(e) => setAddress(e.target.value)} />
+                          <div className="row addressForm">
+
+                            <div className="col-6">
+                              <input type="number" className='addressInput' value={userData.pincode} max={6} placeholder='Pincode' maxLength={6} onChange={handlePincodeChange} />
+                            </div>
+
+                            <div className="col-6">
+                              <input type="number" className='addressInput' value={userData.number} placeholder='Number' maxLength={10} onChange={handleNumberChange} />
+                            </div>
+
+                            <div className="col-6">
+                              <input type="text" className='addressInput' value={userData.city} placeholder='City' onChange={(e) => setUserData({ ...userData, city: e.target.value })} />
+                            </div>
+
+                            <div className="col-6">
+                              <input type="text" className='addressInput' value={userData.state} placeholder='State' onChange={(e) => setUserData({ ...userData, state: e.target.value })} />
+                            </div>
+
+                            <div className="col-12">
+                              <textarea type="text" className='addressInput' value={userData.address} placeholder='Address' onChange={(e) => setUserData({ ...userData, address: e.target.value })} />
+                            </div>
+
+                          </div>
                           <div className='d-flex justify-content-end mt-3'>
-                            <button className='btn btn-danger' onClick={handleAddress}>Submit</button>
+                            <button className='btn btn-danger fw-bold' onClick={handleAddress}>Submit</button>
                           </div>
                         </Modal.Body>
                       </Modal>

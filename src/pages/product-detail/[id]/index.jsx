@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 import AllProducts from '@/Components/allProducts/AllProducts'
 import { useDispatch, useSelector } from 'react-redux'
 import { isLoginSelector } from '@/store/slices/authSlice'
-import { setCartData, setWishlistData } from '@/store/slices/UserProducts'
+import { cartDataSelector, setCartData, setWishlistData, wishlistSelector } from '@/store/slices/UserProducts'
 import toast from 'react-hot-toast'
 import CommonCardSections from '@/Components/CommonCardSections'
 import newArrivals from '@/Components/commonProducts/newArrivals'
@@ -26,17 +26,32 @@ const index = () => {
 
     const newArrivalsData = newArrivals.slice(0, 4)
 
+    const cartData = useSelector(cartDataSelector)
+    const wishlistData = useSelector(wishlistSelector)
+
+    // Check if the product is already in the wishlist
+    const isInWishlist = wishlistData.find(item => item.id === productId);
+
+    // Check if the product is already in the cart
+    const isInCart = cartData.find(item => item.id === productId);
+
     const addToCart = (e) => {
         e.stopPropagation()
         if (isLogin) {
-            const product = {
-                ...allProductsData[productId],
-                quantity,
-                size,
-                color,
+            if (isInCart) {
+                toast.error('Item already in Cart');
             }
-            dispatch(setCartData({ data: product }))
-            toast.success('Successfully Added To Cart')
+            else {
+
+                const product = {
+                    ...allProductsData[productId],
+                    quantity,
+                    size,
+                    color,
+                }
+                dispatch(setCartData({ data: product }))
+                toast.success('Item Added To Cart')
+            }
         }
         else {
             toast.error('Please Login First')
@@ -46,14 +61,20 @@ const index = () => {
         e.stopPropagation()
         // console.log(isLogin)
         if (isLogin) {
-            const product = {
-                ...allProductsData[productId],
-                quantity,
-                size,
-                color,
+            if (isInWishlist) {
+                toast.error('Item already in Wishlist');
             }
-            dispatch(setWishlistData({ data: product }))
-            toast.success('Succesfully Added To Wishlist')
+            else {
+
+                const product = {
+                    ...allProductsData[productId],
+                    quantity,
+                    size,
+                    color,
+                }
+                dispatch(setWishlistData({ data: product }))
+                toast.success('Succesfully Added To Wishlist')
+            }
         }
         else {
             toast.error('Please Login First')
@@ -61,16 +82,17 @@ const index = () => {
     }
 
     useEffect(() => {
-        setPrevImg(allProductsData && allProductsData[productId]?.img)
-
     }, [prevImg, productId])
+    useEffect(() => {
+        setPrevImg(allProductsData && allProductsData[productId]?.img)
+    }, [productId])
 
 
     return (
         <>
             <section className='productDetailPage container commonMT'>
                 <div className="row">
-                    <div className="col-md-6 col-lg-5">
+                    <div className="col-12 col-xl-5">
                         <div className="imgsWrapper">
                             <div className="prevImg">
                                 <img src={prevImg?.src} height={0} width={0} alt='mainImg' />
@@ -83,7 +105,7 @@ const index = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="col-md-6 col-lg-7">
+                    <div className="col-12 col-xl-7">
                         <div className="detailsWrapper">
                             <div className="upperDiv">
                                 <div>
