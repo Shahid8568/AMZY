@@ -26,6 +26,6 @@
     "swiper": "^11.0.7"
   },
   "devDependencies": {
-    "eslint": "^9.9.1"
+    "eslint": "^9.10.0"
   }
 }
