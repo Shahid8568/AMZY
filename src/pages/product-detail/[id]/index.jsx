@@ -127,7 +127,7 @@ const index = () => {
                                 </div>
                                 <div>
                                     <div className='d-flex align-items-center gap-2'>
-                                        <span className='price'>₹{allProductsData[productId]?.OfferPrice}</span>
+                                        <span className='price'>₹{allProductsData[productId]?.offerPrice}</span>
                                         <span className='cutPrice'>{allProductsData[productId]?.price}</span>
                                     </div>
                                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus expedita sapiente earum, autem iure sit excepturi quas quod dignissimos impedit. Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
