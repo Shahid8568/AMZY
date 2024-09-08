@@ -66,8 +66,8 @@ const Footer = () => {
                   <span className='contactIcons'><FaArrowRight /></span>
                   <Link href={'women'}>Women</Link>
                 </div>
-                <div className='d-flex gap-3'>
-                  <span className='contactIcons' onClick={handleCartNavigate}><FaArrowRight /></span>
+                <div className='d-flex gap-3' onClick={handleCartNavigate}>
+                  <span className='contactIcons'><FaArrowRight /></span>
                   <Link href={'/profile'}>Cart</Link>
                 </div>
                 <div className='d-flex gap-3'>
