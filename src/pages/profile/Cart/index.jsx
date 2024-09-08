@@ -26,15 +26,15 @@ const Cart = () => {
   const [payAmount, setPayAmount] = useState(null)
 
   const [userData, setUserData] = useState({
-    pincode: user.userPincode,
-    number: user.userNumber,
-    state: user.userState,
-    city: user.userCity,
-    address: user.userAddress,
+    pincode: user && user.userPincode,
+    number: user && user.userNumber,
+    state: user && user.userState,
+    city: user && user.userCity,
+    address: user && user.userAddress,
   })
 
 
-  const data = userData.address && userData.city && userData.number && userData.pincode && userData.state;
+  const data = user && userData.address && userData.city && userData.number && userData.pincode && userData.state;
 
   const [show, setShow] = useState(false);
 
@@ -105,6 +105,9 @@ const Cart = () => {
   useEffect(() => {
   }, [data])
 
+  const fullAddress = `${userData.address}, ${userData.city}, ${userData.state}, ${userData.pincode}`;
+
+
 
 
   const handlePayment = () => {
@@ -113,8 +116,8 @@ const Cart = () => {
     }
     else {
       const options = {
-        key: process.env.NEXT_PUBLIC_KEY, 
-        amount: payAmount * 100, 
+        key: process.env.NEXT_PUBLIC_KEY,
+        amount: payAmount * 100,
         currency: 'INR',
         name: 'AMZY',
         description: 'Test Transaction',
@@ -129,12 +132,12 @@ const Cart = () => {
           // console.log(response.razorpay_signature);
         },
         prefill: {
-          name: user?.userName,
-          email: user?.userEmail,
-          contact: user?.userNumber,
+          name: user && user?.userName,
+          email: user && user?.userEmail,
+          contact: user && user?.userNumber,
         },
         notes: {
-          address: 'Your Address',
+          address: fullAddress,
         },
         theme: {
           color: '#3399cc',
