@@ -7,8 +7,17 @@ import Image from 'next/image';
 import appStoreImg from '../../Assets/images/appStore.png'
 import paymentsGatewaysImg from '../../Assets/images/payment_icons.webp'
 import Link from 'next/link';
+import { useDispatch } from 'react-redux';
+import { setIsCartLink } from '@/store/slices/UserProducts';
 
 const Footer = () => {
+
+  const dispatch = useDispatch()
+
+  const handleCartNavigate = () => {
+    dispatch(setIsCartLink({ data: true }))
+  }
+
   return (
     <footer className='commonMT'>
       <div className="container">
@@ -58,8 +67,8 @@ const Footer = () => {
                   <Link href={'women'}>Women</Link>
                 </div>
                 <div className='d-flex gap-3'>
-                  <span className='contactIcons'><FaArrowRight /></span>
-                  <Link href={''}>Cart</Link>
+                  <span className='contactIcons' onClick={handleCartNavigate}><FaArrowRight /></span>
+                  <Link href={'/profile'}>Cart</Link>
                 </div>
                 <div className='d-flex gap-3'>
                   <span className='contactIcons'><FaArrowRight /></span>
