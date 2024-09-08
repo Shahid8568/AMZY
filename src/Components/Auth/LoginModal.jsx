@@ -41,8 +41,9 @@ const LoginModal = ({ show, onHide, setModalSignUp }) => {
                 onHide()
                 dispatch(userSignIn({ user }))
             }).catch((error) => {
-                console.log(error)
-                toast.error(error.message)
+                var errorCode = error.code
+                var errorMessage = getAuthErrorMessage(errorCode);
+                toast.error(errorMessage)
             })
     }
 
