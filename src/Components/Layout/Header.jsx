@@ -191,7 +191,10 @@ const Header = () => {
                           </Space>
                         </a>
                       </Dropdown>
-                      : <span className='btn btn-danger text-light' onClick={() => setModalShow(true)}>Login/Sign Up</span>
+                      : <div>
+                        <span className='btn btn-danger text-light' onClick={() => setModalShow(true)}>Login</span>
+                        <span className='btn btn-danger text-light ms-2' onClick={() => setModalSignUp(true)}>Sign Up</span>
+                      </div>
                   }
                 </div>
               </div>

@@ -24,7 +24,7 @@ const Layout = ({ children }) => {
         if (requiresAuth) {
             if (!isLogin) {
                 router.push('/')
-                toast.error('please login first')
+                toast.error('Please login first!')
                 return
             }
         }

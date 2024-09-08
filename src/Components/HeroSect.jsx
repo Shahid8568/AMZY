@@ -1,6 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 import heroImg from '../Assets/images/heroImg.png'
+import Link from 'next/link'
 
 const HeroSect = () => {
     return (
@@ -17,9 +18,11 @@ const HeroSect = () => {
                             thoughtfully designed to highlight your unique
                             style and elevate your footwear game.
                         </p>
-                        <button>
-                            Shop Now
-                        </button>
+                        <Link href={'#featureSect'}>
+                            <button>
+                                Shop Now
+                            </button>
+                        </Link>
 
                         <div className='infoWrapper'>
                             <div>

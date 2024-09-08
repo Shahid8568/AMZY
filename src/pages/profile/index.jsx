@@ -24,10 +24,7 @@ const Index = () => {
 
   const router = useRouter();
   useEffect(() => {
-    // console.log(router, 'router')
   }, [router])
-
-  // console.log(user)
 
   const tabs = [
     {

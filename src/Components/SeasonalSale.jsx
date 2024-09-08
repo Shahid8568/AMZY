@@ -16,7 +16,7 @@ const SeasonalSale = () => {
                             <span className='buyText'>Buy 1 Get 1 Free!</span>
                             <span className='desc'>Best Western collection sale at AMZY</span>
 
-                            <Link href={""}>
+                            <Link href={"/women"}>
                                 <span className='shopBtn'>Shop Now</span>
                             </Link>
 
@@ -34,7 +34,7 @@ const SeasonalSale = () => {
                             <span className='buyText'>Buy 1 Get 2 Free!</span>
                             <span className='desc'>Winter Collection - 35% OFF</span>
 
-                            <Link href={""}>
+                            <Link href={"/men"}>
                                 <span className='shopBtn'>View Collection</span>
                             </Link>
 

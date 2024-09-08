@@ -4,7 +4,7 @@ import CommonCard from './CommonCard';
 const CommonCardSections = ({ title, products, id,newArrivals }) => {
 
   return (
-    <section className='featureProducts container commonMT' id={id}>
+    <section className='container commonMT' id={id} >
 
       <h2 className='commonHeadTag'>{title}</h2>
       <div className="row">

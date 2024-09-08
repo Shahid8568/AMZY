@@ -18,7 +18,6 @@ export const authSlice = createSlice({
     reducers: {
         userSignIn: (state, action) => {
             const { user } = action.payload;
-            // console.log('userSLiceUSer', user)
 
             state.isLogIn = true;
             state.isVerified = user.emailVerified
@@ -28,9 +27,7 @@ export const authSlice = createSlice({
         },
         userLogOut: (state, action) => {
             const isLogIn = action.payload;
-            // console.log(isLogIn, 'login(isLogin)')
             state.isLogIn = isLogIn;
-            // console.log('logOutState', state.isLogIn)
         },
         userProfile: (state, action) => {
             const { name, email, number,address,pincode,userState,city, } = action.payload;

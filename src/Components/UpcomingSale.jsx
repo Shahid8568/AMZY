@@ -15,7 +15,7 @@ const UpcomingSale = () => {
                         <div className="dealsDetailsWrapper">
                             <span className='title'>Explore Top Brands</span>
                             <span className='desc'>Upto 30-45% Off!</span>
-                            <Link href={""}>
+                            <Link href={"/men"}>
                                 <span className='shopBtn'>Explore Now</span>
                             </Link>
 
@@ -32,7 +32,7 @@ const UpcomingSale = () => {
                             <span className='title'>Western Collection</span>
                             <span className='desc'>The Best Western And Classic Dress at AMZY</span>
 
-                            <Link href={""}>
+                            <Link href={"/women"}>
                                 <span className='shopBtn'>View Collection</span>
                             </Link>
 

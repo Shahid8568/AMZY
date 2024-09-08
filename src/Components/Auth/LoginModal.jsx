@@ -58,7 +58,6 @@ const LoginModal = ({ show, onHide, setModalSignUp }) => {
                 const user = result.user;
                 toast.success('Login Successfully !')
                 onHide()
-                console.log('user', user)
                 dispatch(userSignIn({ user }))
                 // IdP data available using getAdditionalUserInfo(result)
                 // ...

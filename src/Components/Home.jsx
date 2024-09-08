@@ -16,12 +16,12 @@ const Home = () => {
 
       <HeroSect />
       <BrandsSect/>
-      <CommonCardSections title="Feature Products" products={featuredProducts} />
+      <CommonCardSections title="Feature Products" products={featuredProducts} id={'featureSect'}/>
       <SeasonalSale />
       <SuperDealSect />
       {/* <BigDaysSales /> */}
       <UpcomingSale />
-      <CommonCardSections title="New Arrivals" products={newArrivals} />
+      <CommonCardSections title="New Arrivals" products={newArrivals} id={'newArrivalsSect'}/>
       {/* <GoTopBtn/> */}
 
 

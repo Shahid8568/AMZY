@@ -59,7 +59,6 @@ const index = () => {
     }
     const addToWishlist = (e) => {
         e.stopPropagation()
-        // console.log(isLogin)
         if (isLogin) {
             if (isInWishlist) {
                 toast.error('Item already in Wishlist');
