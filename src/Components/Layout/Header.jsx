@@ -78,7 +78,9 @@ const Header = () => {
         <div className="container navbarWrapper">
           <div className="leftDiv">
             <div className="navLogo">
+              <Link href={'/'}>
               <Image src={navLogo} height={0} width={0} alt='navLogo' />
+              </Link>
             </div>
           </div>
           <div className="centerDiv">

@@ -216,7 +216,7 @@ header .rightDiv .profileTab span {
   border: none;
 }
 
-.ant-dropdown-trigger{
+.ant-dropdown-trigger {
   background-color: var(--primary-color);
   padding: 8px;
   border-radius: 6px;
@@ -224,7 +224,7 @@ header .rightDiv .profileTab span {
   cursor: pointer;
 }
 
-.ant-dropdown .ant-dropdown-menu .ant-dropdown-menu-item{
+.ant-dropdown .ant-dropdown-menu .ant-dropdown-menu-item {
   font-size: 16px !important;
 }
 
@@ -273,6 +273,14 @@ header .rightDiv .profileTab span {
   position: relative;
   width: max-content;
 }
+
+@media screen and (max-width:575px) {
+  .offcanvas .searchBar {
+    width: 150px;
+  }
+
+}
+
 
 .offcanvas .searchBar .suggestions {
   height: 300px;
@@ -464,6 +472,7 @@ header .rightDiv .profileTab span {
   position: relative;
   overflow: hidden;
 }
+
 .superDealImg {
   height: 600px;
   position: relative;
@@ -2456,12 +2465,12 @@ input::-webkit-inner-spin-button {
   border: none !important;
 }
 
-.addressForm{
+.addressForm {
   gap: 20px 0px;
 }
 
 .addressForm input:focus,
-.addressForm textarea:focus{
+.addressForm textarea:focus {
   outline: none;
   border: 1px solid var(--primary-color);
 }
